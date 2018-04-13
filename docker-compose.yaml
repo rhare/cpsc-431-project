@@ -1,0 +1,12 @@
+version: '2'
+services:
+  php-apache:
+    ports:
+      - "80:80"
+    image: php-7.2.1-apache-project:latest
+  mariadb:
+      ports:
+          - "3306:3306"
+      image: mariadb
+      environment:
+          - MYSQL_ROOT_PASSWORD=password

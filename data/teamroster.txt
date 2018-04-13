@@ -1,0 +1,2 @@
+Duck, Donald	1234 Duck St.	Anaheim	CA	92802
+Mouse, Mickey	4321 Mouse St.	Anaheim	CA	92802
