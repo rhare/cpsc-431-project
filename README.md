@@ -6,8 +6,9 @@ Empty project
 
 
 I have include my homework 3 as a base to start with. I have included Docker files to run the project in dokcer
-containers. The Docker files build a custom container with the source code and php + apache and launch the container
-along with a MariaDB container.
+containers. The Docker files build a custom container and launches it with a MariaDB container. The custom container
+is built with Apache and PHP 7.2.1 as a base container. Source code is copied to the container during the build
+process. 
 
 
 ## Install
