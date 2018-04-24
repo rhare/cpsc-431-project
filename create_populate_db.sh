@@ -1,2 +1,2 @@
 #!/bin/bash
-mysql -h 192.168.99.100 -u root --password=password < hw3_ddl.sql
+mysql -h 192.168.99.100 -u root --password=password < schema.sql
