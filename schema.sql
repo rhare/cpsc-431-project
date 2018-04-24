@@ -10,6 +10,8 @@ CREATE TABLE Users (
   UserName VARCHAR(64) NOT NULL,
   Email VARCHAR(256) NOT NULL,
   PasswordHash CHAR(128) NOT NULL,
+  Role VARCHAR(32) NOT NULL DEFAULT 'observer' 
+    CHECK ( Role in ('observer', 'users', 'manager', 'dba')),
   PRIMARY KEY (UserId),
   UNIQUE KEY (UserName)
 );
