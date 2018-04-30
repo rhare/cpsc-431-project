@@ -26,6 +26,6 @@ if(!empty($name_id)) {
     $newStat->toDB($mysqli);
 }
 $mysqli->close();
-require('home_page.php');
+require('index.php');
 ?>
 

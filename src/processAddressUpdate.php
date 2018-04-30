@@ -28,6 +28,6 @@ if(!empty($name)) {
     $newAddress->toDB($mysqli);
 }
 $mysqli->close();
-require('home_page.php');
+require('index.php');
 ?>
 
