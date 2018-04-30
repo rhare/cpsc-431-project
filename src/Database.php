@@ -53,9 +53,9 @@ class Database
   }
 
   function connect_by_role($role) {
-    if ($role == 'users') return $this->connect_observer();
-    if ($role == 'manager') return $this->connect_observer();
-    if ($role == 'dba') return $this->connect_observer();
+    if ($role == 'users') return $this->connect_users();
+    if ($role == 'manager') return $this->connect_manager();
+    if ($role == 'dba') return $this->connect_dba();
     return $this->connect_observer();
   }
 }
