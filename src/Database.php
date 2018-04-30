@@ -4,11 +4,24 @@ class Database
   // Instance attributes
   private $db_host = '192.168.99.100';  // Docker container
   private $db_name = 'BBDB';
+
+  // Define default user and password
+  private $db_user = 'observer';
+  private $db_password = 'observer-pw1';
+
+  // Users and passwords
   private $db_users = ['observer', 'users', 'manager', 'dba'];
   private $db_password_observer = 'observer-pw1';
   private $db_password_users = 'users-pw1';
   private $db_password_manager = 'manager-pw1';
   private $db_password_dba = 'dba-pw1';
+
+  function __construct($db_host='', $db_name='', $db_user='', $db_password='') {
+    $this->db_host = $db_host;
+    $this->db_name = $db_name;
+    $this->db_user = $db_user;
+    $this->db_password = $db_password;
+  }
 
   function connect_observer() {
     $mysqli = new mysqli($this->db_host, 'observer', $this->db_password_observer, $this->db_name);
