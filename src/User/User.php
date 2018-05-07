@@ -10,20 +10,9 @@ class User
 
   // Instance attributes
   private $userId = NULL;
-  private $userName = NULL;
   private $email = NULL;
   private $passwordHash = NULL;
   private $role = 'observer';
-
-  function userName() {
-    if( func_num_args() == 0 ) {
-      return $this->userName;
-    }  if else(func_num_args() == 1) {
-      $value = func_get_arg(0);
-      $this->userName = htmlspecialchars(trim($value));
-    }
-    return $this;
-  }
 
   function email() {
     if( func_num_args() == 0 ) {
@@ -55,8 +44,7 @@ class User
     return $this;
   }
 
-  function __construct($userName='', $email='', $passwordHash='', $role='observer') { 
-    $this->userName($userName);
+  function __construct($email='', $passwordHash='', $role='observer') { 
     $this->email($email);
     $this->passwordHash($passwordHash);
     $this->role($role);
