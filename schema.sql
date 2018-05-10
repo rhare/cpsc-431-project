@@ -55,7 +55,6 @@ CREATE TABLE Stat (
 );
 
 -- Create Stored Procedures
-DROP PROCEDURE IF EXISTS set_password;
 DELIMITER //
 CREATE PROCEDURE set_password
 (IN In_UserId INT(10), IN In_Password CHAR(128))
@@ -88,5 +87,5 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON Users TO manager IDENTIFIED BY 'manager-
 GRANT SELECT, INSERT, UPDATE, DELETE ON Player TO manager IDENTIFIED BY 'manager-pw1';
 GRANT EXECUTE ON PROCEDURE set_password TO manager IDENTIFIED by 'manager-pw1';
 
-GRANT ALL ON *.* TO dba IDENTIFIED BY 'dba-pw1';
+GRANT ALL ON * TO dba IDENTIFIED BY 'dba-pw1';
 
