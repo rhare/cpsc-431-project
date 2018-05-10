@@ -2,7 +2,7 @@
 class Database
 {
   // Instance attributes
-  private $db_host = '192.168.99.100';  // Docker container
+  private $db_host = 'bbdb.cfaogxpo12on.us-east-2.rds.amazonaws.com';
   private $db_name = 'BBDB';
 
   // Define default user and password
