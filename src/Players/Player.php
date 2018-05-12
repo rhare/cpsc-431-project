@@ -1,4 +1,5 @@
 <?php
+// Implement Player class here. It will represent an instance of a Player
 class Address
 {
     // Instance attributes
