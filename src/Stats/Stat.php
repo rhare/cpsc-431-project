@@ -1,4 +1,5 @@
 <?php
+// Implement Stat class here. It will represent an instance of a Stat
 class PlayerStatistic
 {
    // Instance attributes

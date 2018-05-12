@@ -1,4 +1,5 @@
 <?php
+// Implement User class here. It will represent an instance of a User. 
 class User
 {
 
