@@ -1,4 +1,4 @@
-  <?php require_once(__DIR__ . '/headernavbar.php'); ?>
+  <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/headernavbar.php'); ?>
 
   <body>
 
