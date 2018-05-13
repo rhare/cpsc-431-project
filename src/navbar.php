@@ -4,24 +4,28 @@
 //  and the nav bar.
 //<h1 style="text-align:center">BasketStats</h1>
 ?>
-<ul class="nav nav-pills">
-  <li class="nav-item">
-    <a class="nav-link" href="/">Home</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="/Teams/">Teams</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="/Players/">Players</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="/Games/">Games</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="/Settings/">Settings</a>
-  </li>
-</ul>
-<ul class="nav nav-pills ">
-</ul>
-
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="/">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/Teams/">Teams</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/Players/">Players</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/Games/">Games</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/Settings/">Settings</a>
+      </li>
+    </ul>
+  </div>
+</nav>
 <?php
