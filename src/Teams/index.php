@@ -27,7 +27,7 @@
 
 <?php
 $db = new Database();
-$db_conn = $db->connect_dba(); // Temp for now until roles are properly inplace.
+$db_conn = $db->connect_observer();
 $query = "SELECT * FROM Team";
 $res = $db_conn->query($query);
 $teams = array();
