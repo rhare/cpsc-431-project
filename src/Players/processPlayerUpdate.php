@@ -10,7 +10,6 @@ $state     = ucwords(strtolower($_POST['state']));
 $zipcode   = $_POST['zipCode'];
 $country   = ucwords(strtolower($_POST['country']));
 $teamId   = $_POST['team'];
-$teamId = 1; // Hardcoded for now :: TODO REMOVE LATER!!
 
 require_once($_SERVER['DOCUMENT_ROOT']  . '/utils/Database.php');
 require_once($_SERVER['DOCUMENT_ROOT']  . '/Auth/User.php');

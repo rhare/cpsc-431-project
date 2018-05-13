@@ -3,6 +3,16 @@
   <div class="row my-2">
     <div class="col-s">
       <?php 
+        // Generate list of teams.
+        $db = new Database();
+        $db_conn = $db->connect_observer();
+        $query = "SELECT TeamName, TeamId from Team";
+        $res = $db_conn->query($query);
+        $teams = array();
+        while ($row = $res->fetch_assoc()) {
+          $teams[] = $row;
+        }
+
       if(!empty($_SESSION['message'])) { ?>
         <div class="<?php echo $_SESSION['message']['alert_type'];?>" role="alert">
         <?php echo $_SESSION['message']['message'];?>
@@ -15,8 +25,13 @@
           </div>
           <ul class="list-group list-group-flush">
             <li class="list-group-item">
-              <label for="firstName">Team</label>
-              <input required type="text" class="form-control" name="team" id="team" placeholder="Enter Team Name">
+              <label for="team">Team</label>
+              <select required class="form-control" name="team" id="team">
+                <option value="">--Select Team--</option>
+                  <?php foreach ($teams as $i => $teamArr) {  ?>
+                    <option value="<?php echo $teamArr['TeamId']; ?>"><?php echo $teamArr['TeamName'];?></option>
+                  <?php } ?>
+              </select>
             </li>
             <li class="list-group-item">
               <div class="form-row">
@@ -51,8 +66,6 @@
   <div class="row my-2">
     <div class="col-lg">
 <?php
-$db = new Database();
-$db_conn = $db->connect_observer();
 $query = "
   SELECT  Person.FirstName, Person.LastName, Person.PersonId, Team.TeamName
   FROM    Player, Person, Team 
