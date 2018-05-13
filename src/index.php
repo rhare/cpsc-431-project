@@ -50,24 +50,6 @@ $players = array();
 
 ?>
 
-<table class="table">
-  <tr>
-    <th colspan="1" style="vertical-align:top; border:1px solid black; background: lightgreen;"></th>
-    <th colspan="2" style="vertical-align:top; border:1px solid black; background: lightgreen;">Player</th>
-    <th colspan="1" style="vertical-align:top; border:1px solid black; background: lightgreen;"></th>
-    <th colspan="4" style="vertical-align:top; border:1px solid black; background: lightgreen;">Statistic Averages</th>
-  </tr>
-  <tr>
-    <th style="vertical-align:top; border:1px solid black; background: lightgreen;"></th>
-    <th style="vertical-align:top; border:1px solid black; background: lightgreen;">Name</th>
-    <th style="vertical-align:top; border:1px solid black; background: lightgreen;">Address</th>
-
-    <th style="vertical-align:top; border:1px solid black; background: lightgreen;">Games Played</th>
-    <th style="vertical-align:top; border:1px solid black; background: lightgreen;">Time on Court</th>
-    <th style="vertical-align:top; border:1px solid black; background: lightgreen;">Points Scored</th>
-    <th style="vertical-align:top; border:1px solid black; background: lightgreen;">Number of Assists</th>
-    <th style="vertical-align:top; border:1px solid black; background: lightgreen;">Number of Rebounds</th>
-  </tr>
   <?php
     // for each row (record) of data retrieved from the database emit the html to populate a row in the table
     // for example:
@@ -98,19 +80,7 @@ $players = array();
         }
         $background = (empty($avg_time)) ? 'background: #e6e6e6;' :  '' ;
      ?>
-      <tr>
-        <td  style="vertical-align:top; border:1px solid black;"><?php echo $i+1; ?></td>
-        <td  style="vertical-align:top; border:1px solid black;"><?php echo $name; ?></td>
-        <td  style="vertical-align:top; border:1px solid black;"><?php echo $address; ?></td>
-        <td  style="vertical-align:top; border:1px solid black;"><?php echo $player['games_played']; ?></td>
-        <td  style="vertical-align:top; border:1px solid black; <?php echo $background; ?>"><?php echo $avg_time; ?></td>
-        <td  style="vertical-align:top; border:1px solid black; <?php echo $background; ?>"><?php echo $avg_points; ?></td>
-        <td  style="vertical-align:top; border:1px solid black; <?php echo $background; ?>"><?php echo $avg_assists; ?></td>
-        <td  style="vertical-align:top; border:1px solid black; <?php echo $background; ?>"><?php echo $avg_rebounds; ?></td>
-      </tr>
     <?php
     }
   ?>
-</table>
-
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/footer.php'); ?>
