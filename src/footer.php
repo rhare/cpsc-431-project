@@ -7,7 +7,7 @@
     <script type="text/javascript">
     $(document).ready(function () {
         var url = window.location.pathname;
-        $('ul.nav a[href="'+ url +'"]').addClass('active');
+        $('ul.navbar-nav a[href="'+ url +'"]').addClass('active');
     });
     </script> 
   </body>

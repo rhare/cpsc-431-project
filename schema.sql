@@ -124,5 +124,4 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON Player TO manager IDENTIFIED BY 'manager
 GRANT SELECT, INSERT, UPDATE, DELETE ON Coach TO manager IDENTIFIED BY 'manager-pw1';
 GRANT EXECUTE ON PROCEDURE set_password TO manager IDENTIFIED by 'manager-pw1';
 
-GRANT ALL ON * TO dba IDENTIFIED BY 'dba-pw1';
-
+GRANT ALL ON * TO 'dba'@'cpe-172-248-59-225.socal.res.rr.com' IDENTIFIED BY 'dba-pw1';

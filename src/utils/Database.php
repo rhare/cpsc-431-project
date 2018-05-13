@@ -24,7 +24,11 @@ class Database
   }
 
   private function connect($role) {
-    $mysqli = new mysqli($this->db_host, $role, $this->db_password_observer, $this->db_name);
+    if ($role == 'users') $password = $this->db_password_users;
+    else if ($role == 'manager') $password = $this->db_password_manager;
+    else if ($role == 'dba') $password = $this->db_password_dba;
+    else $password = $this->db_password_observer;
+    $mysqli = new mysqli($this->db_host, $role, $password, $this->db_name);
     /* check connection */
     if (mysqli_connect_errno()) {
         printf("connect failed: %s\n", mysqli_connect_errno());
