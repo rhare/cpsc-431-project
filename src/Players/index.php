@@ -9,48 +9,54 @@
         </div>
       <?php } ?>
       <div class="card" style="width: 36rem;">
-        <div class="card-body">
-          <h5 class="card-title">Create New Player</h5>
-          <form action="/Teams/processTeamUpdate.php" method="POST" data-tmeams="form">
-            <div class="form-row">
-              <div class="col">
-                <label for="firstName">First Name</label>
-                <input required type="text" class="form-control" name="firstName" id="firstName" placeholder="Enter First Name">
-                <label for="lastName">Last Name</label>
-                <input required type="text" class="form-control" name="lastName" id="lastName" placeholder="Enter Last Name">
-                <label for="firstName">First Name</label>
-                <input required type="text" class="form-control" name="firstName" id="firstName" placeholder="Enter First Name">
-                <label for="email">Email</label>
-                <input required type="email" class="form-control" name="email" id="email" placeholder="Enter email">
+        <form action="/Players/processPlayerUpdate.php" method="POST" data-tmeams="form">
+          <div class="card-body">
+            <h5 class="card-title">Create New Player</h5>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <label for="firstName">Team</label>
+              <input required type="text" class="form-control" name="team" id="team" placeholder="Enter Team Name">
+            </li>
+            <li class="list-group-item">
+              <div class="form-row">
+                <div class="col">
+                  <label for="firstName">First Name</label>
+                  <input required type="text" class="form-control" name="firstName" id="firstName" placeholder="Enter First Name">
+                  <label for="lastName">Last Name</label>
+                  <input required type="text" class="form-control" name="lastName" id="lastName" placeholder="Enter Last Name">
+                  <label for="email">Email</label>
+                  <input required type="email" class="form-control" name="email" id="email" placeholder="Enter email">
+                </div>
+                <div class="col">
+                  <label for="street">Street</label>
+                  <input type="text" class="form-control" name="street" id="street" placeholder="Enter Street">
+                  <label for="city">City</label>
+                  <input type="text" class="form-control" name="city" id="city" placeholder="Enter City">
+                  <label for="state">State</label>
+                  <input type="text" class="form-control" name="state" id="state" placeholder="Enter State">
+                  <label for="country">Country</label>
+                  <input type="text" class="form-control" name="country" id="country" placeholder="Enter Country">
+                  <label for="zipCode">Zip Code</label>
+                  <input type="text" class="form-control" name="zipCode" id="zipCode" placeholder="Enter Zip Code">
+                </div>
               </div>
-              <div class="col">
-                <label for="street">Street</label>
-                <input required type="text" class="form-control" name="street" id="street" placeholder="Enter Street">
-                <label for="city">City</label>
-                <input required type="text" class="form-control" name="city" id="city" placeholder="Enter City">
-                <label for="state">State</label>
-                <input required type="text" class="form-control" name="state" id="state" placeholder="Enter State">
-                <label for="country">Country</label>
-                <input required type="text" class="form-control" name="country" id="country" placeholder="Enter Country">
-                <label for="zipCode">Zip Code</label>
-                <input required type="text" class="form-control" name="zipCode" id="zipCode" placeholder="Enter Country">
-              </div>
-            </div>
-            <button type="submit" class="btn btn-primary">Create New Player</button>
-          </form>
-        </div>
+              <button type="submit" class="btn btn-primary">Create New Player</button>
+            </li>
+          </ul>
+        </form>
       </div>
-    </div> </div> <!-- end row -->
+    </div>
+  </div>
   <div class="row my-2">
     <div class="col-lg">
-
 <?php
 $db = new Database();
 $db_conn = $db->connect_observer();
 $query = "
   SELECT  Person.FirstName, Person.LastName, Person.PersonId, Team.TeamName
   FROM    Player, Person, Team 
-  WHERE   Player.PersonId=Person.PersonId and Person.TeamId = Team.TeamId";
+  WHERE   Player.PersonId=Person.PersonId and Player.TeamId = Team.TeamId";
 if(!($res = $db_conn->query($query))) {
   printf("Error: %s\n", $db_conn->error);
 }
@@ -71,8 +77,8 @@ while ($row = $res->fetch_assoc()) {
           <?php foreach ($players as $i => $playerArr) {  ?>
               <tr scope="row">
                 <td><?php echo $i+1; ?></td>
-                <td><?php echo $playerArr['LastName']; ?></td>
-                <td><?php echo $playerArr['TeamName']; ?></td>
+                <td><?php echo ucwords(strtolower($playerArr['FirstName'] . ' ' . $playerArr['LastName'])); ?></td>
+                <td><?php echo ucwords(strtolower($playerArr['TeamName'])); ?></td>
               </tr>
           <?php } ?>
         </tbody>

@@ -24,8 +24,7 @@ CREATE TABLE Team (
 
 CREATE TABLE Person ( 
   PersonId INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  TeamId INT(10) UNSIGNED NOT NULL,
-  FirstName VARCHAR(100),
+  FirstName VARCHAR(100) NOT NULL,
   LastName VARCHAR(150) NOT NULL,
   Email VARCHAR(256) NOT NULL,
   Street VARCHAR(250),
@@ -35,7 +34,6 @@ CREATE TABLE Person (
   ZipCode CHAR(10) 
     CHECK (ZipCode RLIKE '(?!0{5})(?!9{5})\\d{5}(-(?!0{4})(?!9{4})\\d{4})?' OR ZipCode is NULL),
   PRIMARY KEY (PersonId),
-  FOREIGN KEY (TeamId) REFERENCES Team(TeamId) ON DELETE RESTRICT,
   UNIQUE KEY Name (LastName, FirstName)
 ) AUTO_INCREMENT=100;
 
@@ -69,18 +67,22 @@ CREATE TABLE Coach (
   CoachId INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   PersonId INT(10) UNSIGNED NOT NULL,
   UserId INT(10) UNSIGNED,
+  TeamId INT(10) UNSIGNED NOT NULL,
   PRIMARY KEY (CoachId),
   FOREIGN KEY (PersonId) REFERENCES Person(PersonId) ON DELETE RESTRICT,
-  FOREIGN KEY (UserId) REFERENCES User(UserId) ON DELETE SET NULL
+  FOREIGN KEY (UserId) REFERENCES User(UserId) ON DELETE SET NULL,
+  FOREIGN KEY (TeamId) REFERENCES Team(TeamId) ON DELETE RESTRICT
 );
 
 CREATE TABLE Player (
   PlayerId INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   PersonId INT(10) UNSIGNED NOT NULL,
   UserId INT(10) UNSIGNED,
+  TeamId INT(10) UNSIGNED NOT NULL,
   PRIMARY KEY (PlayerId),
   FOREIGN KEY (PersonId) REFERENCES Person(PersonId) ON DELETE RESTRICT,
-  FOREIGN KEY (UserId) REFERENCES User(UserId) ON DELETE SET NULL
+  FOREIGN KEY (UserId) REFERENCES User(UserId) ON DELETE SET NULL,
+  FOREIGN KEY (TeamId) REFERENCES Team(TeamId) ON DELETE RESTRICT
 );
 
 -- Create Stored Procedures
@@ -112,7 +114,7 @@ GRANT SELECT ON Stat TO observer IDENTIFIED BY 'observer-pw1';
 GRANT SELECT ON Player TO observer IDENTIFIED BY 'observer-pw1';
 GRANT SELECT ON Coach TO observer IDENTIFIED BY 'observer-pw1';
 GRANT SELECT ON User TO observer IDENTIFIED by 'observer-pw1';
-GRANT SELECT (PersonId, TeamId, FirstName, LastName) ON Person TO observer IDENTIFIED by 'observer-pw1';
+GRANT SELECT (PersonId, FirstName, LastName) ON Person TO observer IDENTIFIED by 'observer-pw1';
 GRANT EXECUTE ON PROCEDURE set_password TO observer IDENTIFIED by 'observer-pw1';
 GRANT EXECUTE ON PROCEDURE new_user TO observer IDENTIFIED by 'observer-pw1';
 
@@ -122,7 +124,7 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON Team TO users IDENTIFIED BY 'users-pw1';
 GRANT SELECT ON Player TO users IDENTIFIED BY 'users-pw1';
 GRANT SELECT ON Coach TO users IDENTIFIED BY 'users-pw1';
 GRANT SELECT ON User TO users IDENTIFIED by 'users-pw1';
-GRANT SELECT (PersonId, TeamId, FirstName, LastName) ON Person TO users IDENTIFIED by 'users-pw1';
+GRANT SELECT (PersonId, FirstName, LastName) ON Person TO users IDENTIFIED by 'users-pw1';
 GRANT EXECUTE ON PROCEDURE set_password TO users IDENTIFIED by 'users-pw1';
 GRANT EXECUTE ON PROCEDURE new_user TO users IDENTIFIED by 'users-pw1';
 
@@ -141,3 +143,8 @@ GRANT ALL ON * TO dba IDENTIFIED BY 'dba-pw1';
 INSERT INTO User ( Email, PasswordHash, Role) Values 
   ('root@root.com', '$2y$10$z/dcwNUj72MzvvMgqm0jsOzI0oJli.e9W75gP7RJuP.73f.KKjJ2a', 'dba'),
   ('rhare@csu.fullerton.edu', '$2y$10$z/dcwNUj72MzvvMgqm0jsOzI0oJli.e9W75gP7RJuP.73f.KKjJ2a', 'manager');
+
+INSERT INTO Team (TeamName) Values 
+  ('Owls'),
+  ('Titans'),
+  ('Knights');
