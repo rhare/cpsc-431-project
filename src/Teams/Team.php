@@ -9,8 +9,7 @@ class Team {
 
   function teamName() {
     if( func_num_args() == 0 ) {
-      return $this->teamName;
-    } else if(func_num_args() == 1) {
+      return $this->teamName; } else if(func_num_args() == 1) {
       $value = func_get_arg(0);
       $this->teamName = htmlspecialchars(trim($value));
     }
@@ -37,6 +36,9 @@ class Team {
   function save($db_conn) {
     $query = "INSERT INTO Team (TeamName) values (?)";
     if(!($stmt = $db_conn->prepare($query))) {
+      if($db_conn->errno == 1142){
+        throw new Exception('Permission denied');
+      }
       echo "Prepare failed: (" . $db_conn->errno . ") " . $db_conn->error;
       die("Database execution failed");
     }
@@ -44,56 +46,16 @@ class Team {
       echo "Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error;
       die("Database execution failed");
     }
-    $stmt->execute();
+
+    if (!$stmt->execute()) {
+      if($db_conn->errno == 1062){
+        throw new Exception('Team already exists');
+      } else {
+        throw new Exception('Failed to add new team');
+      }
+    }
     return True;
-    //if(empty($this->userId)) {
-    //  // New user.
-    //  $query = "INSERT INTO Statistics
-    //            (Player, PlayingTimeMin, PlayingTimeSec, Points, Assists, Rebounds)
-    //            VALUES
-    //            ((SELECT ID FROM TeamRoster Where Name_Last = ? AND Name_First = ?)), ?, ?, ?, ?, ? )";
-    //  if(!($stmt = $db_conn->prepare($query))) {
-    //    echo "Prepare failed: (" . $db_conn->errno . ") " . $db_conn->error;
-    //    die("Database execution failed");
-    //  }
-    //  if (!$stmt->bind_param(
-    //    'ssiiiii', 
-    //    $this->name['LAST'],
-    //    $this->name['FIRST'],
-    //    $this->playingTime['MINS'], 
-    //    $this->playingTime['SECS'], 
-    //    $this->pointsScored, 
-    //    $this->assists, 
-    //    $this->rebounds
-    //  )){
-    //    echo "Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error;
-    //    die("Database execution failed");
-    //  }
-    //  $stmt->execute();
-    //} else {
-    //  $query = "INSERT INTO Statistics
-    //    (Player, PlayingTimeMin, PlayingTimeSec, Points, Assists, Rebounds)
-    //    VALUES
-    //    (?, ?, ?, ?, ?, ?)";
-    //  if(!($stmt = $db_conn->prepare($query))){
-    //    echo "Prepare failed: (" . $db_conn->errno . ") " . $db_conn->error;
-    //    die("Database execution failed");
-    //  }
-    //  if (!$stmt->bind_param(
-    //    'iiiiii', 
-    //    $this->playerID,
-    //    $this->playingTime['MINS'], 
-    //    $this->playingTime['SECS'], 
-    //    $this->pointsScored, 
-    //    $this->assists, 
-    //    $this->rebounds
-    //  )){
-    //    echo "Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error;
-    //    die("Database execution failed");
-    //  }
-    //  $stmt->execute();
-    //}
   }
-} 
+}
 
 ?>

@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once($_SERVER['DOCUMENT_ROOT']  . '/utils/Database.php');
 ?>
 <!doctype html>
@@ -7,6 +8,7 @@ require_once($_SERVER['DOCUMENT_ROOT']  . '/utils/Database.php');
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
@@ -21,4 +23,8 @@ require_once($_SERVER['DOCUMENT_ROOT']  . '/utils/Database.php');
       </div>
     </div>
 
-  <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/navbar.php'); ?>
+<?php 
+if(!empty($_SESSION['user'])) {
+  require_once($_SERVER['DOCUMENT_ROOT'] . '/navbar.php'); 
+}
+?>

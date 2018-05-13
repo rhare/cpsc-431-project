@@ -18,7 +18,8 @@ CREATE TABLE User (
 CREATE TABLE Team ( 
   TeamId INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   TeamName VARCHAR(256) NOT NULL,
-  PRIMARY KEY (TeamId)
+  PRIMARY KEY (TeamId),
+  UNIQUE KEY (TeamName)
 );
 
 CREATE TABLE Person ( 
@@ -92,6 +93,14 @@ BEGIN
 END //
 DELIMITER ;
 
+DELIMITER //
+CREATE PROCEDURE new_user
+(IN In_Email VARCHAR(256), IN In_Password CHAR(128), IN In_Role ENUM('observer', 'users', 'manager', 'dba'))
+BEGIN
+  Insert into User (Email, PasswordHash, Role) Values (In_Email, In_Password, In_Role);
+END //
+DELIMITER ;
+
 -- Create database users
 DROP USER IF EXISTS observer;
 DROP USER IF EXISTS users;
@@ -102,18 +111,20 @@ GRANT SELECT ON Team TO observer IDENTIFIED BY 'observer-pw1';
 GRANT SELECT ON Stat TO observer IDENTIFIED BY 'observer-pw1';
 GRANT SELECT ON Player TO observer IDENTIFIED BY 'observer-pw1';
 GRANT SELECT ON Coach TO observer IDENTIFIED BY 'observer-pw1';
-GRANT SELECT (UserId, Email) ON User TO observer IDENTIFIED by 'observer-pw1';
+GRANT SELECT ON User TO observer IDENTIFIED by 'observer-pw1';
 GRANT SELECT (PersonId, FirstName, LastName) ON Person TO observer IDENTIFIED by 'observer-pw1';
 GRANT EXECUTE ON PROCEDURE set_password TO observer IDENTIFIED by 'observer-pw1';
+GRANT EXECUTE ON PROCEDURE new_user TO observer IDENTIFIED by 'observer-pw1';
 
 GRANT SELECT, INSERT, UPDATE, DELETE ON Game TO users IDENTIFIED BY 'users-pw1';
 GRANT SELECT, INSERT, UPDATE, DELETE ON Stat TO users IDENTIFIED BY 'users-pw1';
 GRANT SELECT, INSERT, UPDATE, DELETE ON Team TO users IDENTIFIED BY 'users-pw1';
 GRANT SELECT ON Player TO users IDENTIFIED BY 'users-pw1';
 GRANT SELECT ON Coach TO users IDENTIFIED BY 'users-pw1';
-GRANT SELECT (UserId, Email) ON User TO users IDENTIFIED by 'users-pw1';
+GRANT SELECT ON User TO users IDENTIFIED by 'users-pw1';
 GRANT SELECT (PersonId, FirstName, LastName) ON Person TO users IDENTIFIED by 'users-pw1';
 GRANT EXECUTE ON PROCEDURE set_password TO users IDENTIFIED by 'users-pw1';
+GRANT EXECUTE ON PROCEDURE new_user TO users IDENTIFIED by 'users-pw1';
 
 GRANT SELECT, INSERT, UPDATE, DELETE ON Game TO manager IDENTIFIED BY 'manager-pw1';
 GRANT SELECT, INSERT, UPDATE, DELETE ON Team TO manager IDENTIFIED BY 'manager-pw1';
@@ -123,5 +134,6 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON Person TO manager IDENTIFIED BY 'manager
 GRANT SELECT, INSERT, UPDATE, DELETE ON Player TO manager IDENTIFIED BY 'manager-pw1';
 GRANT SELECT, INSERT, UPDATE, DELETE ON Coach TO manager IDENTIFIED BY 'manager-pw1';
 GRANT EXECUTE ON PROCEDURE set_password TO manager IDENTIFIED by 'manager-pw1';
+GRANT EXECUTE ON PROCEDURE new_user TO manager IDENTIFIED by 'manager-pw1';
 
 GRANT ALL ON * TO dba IDENTIFIED BY 'dba-pw1';

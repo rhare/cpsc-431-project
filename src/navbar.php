@@ -9,7 +9,7 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
+    <ul class="navbar-nav mr-auto">
       <li class="nav-item">
         <a class="nav-link" href="/">Home</a>
       </li>
@@ -24,6 +24,11 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/Settings/">Settings</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <button class="btn btn-outline-warning my-2 my-sm-0" onclick="location.href='/Auth/logout.php'">Logout</button>
       </li>
     </ul>
   </div>
