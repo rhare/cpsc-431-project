@@ -112,7 +112,7 @@ GRANT SELECT ON Stat TO observer IDENTIFIED BY 'observer-pw1';
 GRANT SELECT ON Player TO observer IDENTIFIED BY 'observer-pw1';
 GRANT SELECT ON Coach TO observer IDENTIFIED BY 'observer-pw1';
 GRANT SELECT ON User TO observer IDENTIFIED by 'observer-pw1';
-GRANT SELECT (PersonId, FirstName, LastName) ON Person TO observer IDENTIFIED by 'observer-pw1';
+GRANT SELECT (PersonId, TeamId, FirstName, LastName) ON Person TO observer IDENTIFIED by 'observer-pw1';
 GRANT EXECUTE ON PROCEDURE set_password TO observer IDENTIFIED by 'observer-pw1';
 GRANT EXECUTE ON PROCEDURE new_user TO observer IDENTIFIED by 'observer-pw1';
 
@@ -122,7 +122,7 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON Team TO users IDENTIFIED BY 'users-pw1';
 GRANT SELECT ON Player TO users IDENTIFIED BY 'users-pw1';
 GRANT SELECT ON Coach TO users IDENTIFIED BY 'users-pw1';
 GRANT SELECT ON User TO users IDENTIFIED by 'users-pw1';
-GRANT SELECT (PersonId, FirstName, LastName) ON Person TO users IDENTIFIED by 'users-pw1';
+GRANT SELECT (PersonId, TeamId, FirstName, LastName) ON Person TO users IDENTIFIED by 'users-pw1';
 GRANT EXECUTE ON PROCEDURE set_password TO users IDENTIFIED by 'users-pw1';
 GRANT EXECUTE ON PROCEDURE new_user TO users IDENTIFIED by 'users-pw1';
 
@@ -137,3 +137,7 @@ GRANT EXECUTE ON PROCEDURE set_password TO manager IDENTIFIED by 'manager-pw1';
 GRANT EXECUTE ON PROCEDURE new_user TO manager IDENTIFIED by 'manager-pw1';
 
 GRANT ALL ON * TO dba IDENTIFIED BY 'dba-pw1';
+
+INSERT INTO User ( Email, PasswordHash, Role) Values 
+  ('root@root.com', '$2y$10$z/dcwNUj72MzvvMgqm0jsOzI0oJli.e9W75gP7RJuP.73f.KKjJ2a', 'dba'),
+  ('rhare@csu.fullerton.edu', '$2y$10$z/dcwNUj72MzvvMgqm0jsOzI0oJli.e9W75gP7RJuP.73f.KKjJ2a', 'manager');
