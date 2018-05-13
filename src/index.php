@@ -1,16 +1,27 @@
-
-(??)    <?php
-(??)        require_once('utils/Database.php');
-(??)        $db = new Database();
-(??)        echo gettype($db);
-(??)        $conn = $db->connect_observer();
-(??)        $res = $conn->query("SELECT Email FROM Users");
-(??)        $players = array();
-(??)        while ($row = $res->fetch_assoc()) {
-(??)            echo "HELLO WORLD!!";
-(??)            echo $row;
-(??)            print_r($row);
-(??)        }
+<?php
+require_once($_SERVER['DOCUMENT_ROOT'] . '/header.php');
+//require_once('Address.php');
+//require_once('PlayerStatistic.php');
+//$db_host = '192.168.99.100';  // Docker container
+//$db_user = 'bbuser';
+//$db_pass = 'Password!12345';
+//$db_name = 'BBTEAM';
+//$mysqli = new mysqli($db_host, $db_user, $db_pass, $db_name);
+///* check connection */
+//if (mysqli_connect_errno()) {
+//    printf("connect failed: %s\n", mysqli_connect_errno());
+//    die('Database Connection Error');
+//}
+require_once('utils/Database.php');
+$db = new Database();
+$conn = $db->connect_observer();
+$res = $conn->query("SELECT Email FROM Users");
+$players = array();
+#while ($row = $res->fetch_assoc()) {
+#    echo "HELLO WORLD!!";
+#    echo $row;
+#    print_r($row);
+#}
 
 //$q = "SELECT
 //         tr.ID,
@@ -37,12 +48,6 @@
 //while ($row = $res->fetch_assoc()) {
 //    $players[] = $row;
 //}
-
-// Connect to database
-
-// if connection was successful
-// Build query to retrieve player's name, address, and averaged statistics from the joined Team Roster and Statistics tables
-// Prepare, execute, store results, and bind results to local variables
 
 ?>
 
