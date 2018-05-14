@@ -7,6 +7,31 @@ class Team {
   private $teamId = NULL;
   private $teamName = NULL;
 
+  public static function query_by_teamid($db_conn, $teamId) {
+    // Get player by public info
+    $query = "SELECT * FROM Team WHERE TeamId = ?";
+
+    if(!($stmt = $db_conn->prepare($query))) {
+      echo "Prepare failed: (" . $db_conn->errno . ") " . $db_conn->error;
+      die("Database execution failed");
+    }
+    if (!$stmt->bind_param('i', $teamId)){
+      echo "Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error;
+      die("Database execution failed");
+    }
+
+    if (!$stmt->execute()) {
+      throw new Exception('Failed to get player');
+    }
+    $res = $stmt->get_result();
+    $row =  $res->fetch_assoc();
+    if(empty($row)){
+      return NULL;
+    } else {
+      return new Team($row['TeamName'], $teamId);
+    }
+  }
+
   function teamName() {
     if( func_num_args() == 0 ) {
       return $this->teamName; } else if(func_num_args() == 1) {
@@ -23,8 +48,9 @@ class Team {
     return $this;
   }
 
-  function __construct($teamName='') { 
+  function __construct($teamName='', $teamId=NULL) { 
     $this->teamName($teamName);
+    $this->teamId($teamId);
   }
 
    function __toString()

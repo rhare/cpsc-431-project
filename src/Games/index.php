@@ -1,3 +1,9 @@
+<?php 
+if(!empty($_GET) && isset($_GET['id'])) {
+  require('viewGame.php');
+  exit(0);
+}
+?>
 <?php require_once($_SERVER['DOCUMENT_ROOT']  . '/header.php'); ?>
 <div class="container my-3">
   <div class="row my-2">
@@ -89,7 +95,11 @@ while ($row = $res->fetch_assoc()) {
           <?php foreach ($games as $i => $gameArr) {  ?>
               <tr scope="row">
                 <td><?php echo $i+1; ?></td>
-                <td><?php echo ucwords(strtolower($gameArr['TeamName_A'] . ' vs. ' . $gameArr['TeamName_B'])); ?></td>
+                <td>
+                <a href="/Games/?id=<?php echo $gameArr['GameId'];?>">
+                    <?php echo ucwords(strtolower($gameArr['TeamName_A'] . ' vs. ' . $gameArr['TeamName_B'])); ?>
+                  </a>
+                </td>
                 <td><?php echo $gameArr['TeamScore_A']; ?></td>
                 <td><?php echo $gameArr['TeamScore_B']; ?></td>
                 <td><?php echo $gameArr['GameDate']; ?></td>
