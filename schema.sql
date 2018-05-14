@@ -15,14 +15,14 @@ CREATE TABLE User (
 );
 
 
-CREATE TABLE Team ( 
+CREATE TABLE Team (
   TeamId INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   TeamName VARCHAR(256) NOT NULL,
   PRIMARY KEY (TeamId),
   UNIQUE KEY (TeamName)
 );
 
-CREATE TABLE Person ( 
+CREATE TABLE Person (
   PersonId INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   FirstName VARCHAR(100) NOT NULL,
   LastName VARCHAR(150) NOT NULL,
@@ -31,13 +31,32 @@ CREATE TABLE Person (
   City VARCHAR(100),
   State VARCHAR(100),
   Country VARCHAR(100),
-  ZipCode CHAR(10) 
+  ZipCode CHAR(10)
     CHECK (ZipCode RLIKE '(?!0{5})(?!9{5})\\d{5}(-(?!0{4})(?!9{4})\\d{4})?' OR ZipCode is NULL),
   PRIMARY KEY (PersonId),
   UNIQUE KEY Name (LastName, FirstName)
 );
 
-CREATE TABLE Game ( 
+CREATE TABLE PersonStats (
+  PersonId INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  FirstName VARCHAR(100) NOT NULL,
+  LastName VARCHAR(150) NOT NULL,
+  GP FLOAT(16),
+  Min FLOAT(16),
+  PPG FLOAT(16),
+  RPG FLOAT(16),
+  APG FLOAT(16),
+  SPG FLOAT(16),
+  BPG FLOAT(16),
+  TPG FLOAT(16),
+  FGP FLOAT(16),
+  FTP FLOAT(16),
+  TPP FLOAT(16),
+  PRIMARY KEY (PersonId),
+  UNIQUE KEY Name (LastName, FirstName)
+);
+
+CREATE TABLE Game (
   GameId INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   TeamId_A INT(10) UNSIGNED NOT NULL,
   TeamId_B INT(10) UNSIGNED NOT NULL,
@@ -72,7 +91,18 @@ CREATE TABLE Player (
   FOREIGN KEY (TeamId) REFERENCES Team(TeamId) ON DELETE RESTRICT
 );
 
-CREATE TABLE Stat ( 
+CREATE TABLE PlayerStats (
+  PlayerId INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  PersonId INT(10) UNSIGNED NOT NULL,
+  UserId INT(10) UNSIGNED,
+  TeamId INT(10) UNSIGNED NOT NULL,
+  PRIMARY KEY (PlayerId),
+  FOREIGN KEY (PersonId) REFERENCES Person(PersonId) ON DELETE RESTRICT,
+  FOREIGN KEY (UserId) REFERENCES User(UserId) ON DELETE SET NULL,
+  FOREIGN KEY (TeamId) REFERENCES Team(TeamId) ON DELETE RESTRICT
+);
+
+CREATE TABLE Stat (
   StatId INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   PlayerId INT(10) UNSIGNED NOT NULL,
   GameId INT(10) UNSIGNED NOT NULL,
@@ -113,6 +143,7 @@ GRANT SELECT ON Game TO observer IDENTIFIED BY 'observer-pw1';
 GRANT SELECT ON Team TO observer IDENTIFIED BY 'observer-pw1';
 GRANT SELECT ON Stat TO observer IDENTIFIED BY 'observer-pw1';
 GRANT SELECT ON Player TO observer IDENTIFIED BY 'observer-pw1';
+GRANT SELECT ON PlayerStats TO observer IDENTIFIED BY 'observer-pw1';
 GRANT SELECT ON Coach TO observer IDENTIFIED BY 'observer-pw1';
 GRANT SELECT ON User TO observer IDENTIFIED by 'observer-pw1';
 GRANT SELECT (PersonId, FirstName, LastName) ON Person TO observer IDENTIFIED by 'observer-pw1';
@@ -123,6 +154,7 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON Game TO users IDENTIFIED BY 'users-pw1';
 GRANT SELECT, INSERT, UPDATE, DELETE ON Stat TO users IDENTIFIED BY 'users-pw1';
 GRANT SELECT, INSERT, UPDATE, DELETE ON Team TO users IDENTIFIED BY 'users-pw1';
 GRANT SELECT ON Player TO users IDENTIFIED BY 'users-pw1';
+GRANT SELECT ON PlayerStats TO users IDENTIFIED BY 'users-pw1';
 GRANT SELECT ON Coach TO users IDENTIFIED BY 'users-pw1';
 GRANT SELECT ON User TO users IDENTIFIED by 'users-pw1';
 GRANT SELECT (PersonId, FirstName, LastName) ON Person TO users IDENTIFIED by 'users-pw1';
@@ -134,6 +166,7 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON Team TO manager IDENTIFIED BY 'manager-p
 GRANT SELECT, INSERT, UPDATE, DELETE ON Stat TO manager IDENTIFIED BY 'manager-pw1';
 GRANT SELECT, INSERT, UPDATE, DELETE ON User TO manager IDENTIFIED BY 'manager-pw1';
 GRANT SELECT, INSERT, UPDATE, DELETE ON Person TO manager IDENTIFIED BY 'manager-pw1';
+GRANT SELECT, INSERT, UPDATE, DELETE ON PersonStats TO manager IDENTIFIED BY 'manager-pw1';
 GRANT SELECT, INSERT, UPDATE, DELETE ON Player TO manager IDENTIFIED BY 'manager-pw1';
 GRANT SELECT, INSERT, UPDATE, DELETE ON Coach TO manager IDENTIFIED BY 'manager-pw1';
 GRANT EXECUTE ON PROCEDURE set_password TO manager IDENTIFIED by 'manager-pw1';
@@ -141,7 +174,7 @@ GRANT EXECUTE ON PROCEDURE new_user TO manager IDENTIFIED by 'manager-pw1';
 
 GRANT ALL ON * TO dba IDENTIFIED BY 'dba-pw1';
 
-INSERT INTO User ( Email, PasswordHash, Role) Values 
+INSERT INTO User ( Email, PasswordHash, Role) Values
   ('root@root.com', '$2y$10$z/dcwNUj72MzvvMgqm0jsOzI0oJli.e9W75gP7RJuP.73f.KKjJ2a', 'dba'),
   ('rhare@csu.fullerton.edu', '$2y$10$z/dcwNUj72MzvvMgqm0jsOzI0oJli.e9W75gP7RJuP.73f.KKjJ2a', 'manager'),
   ('user1@csu.fullerton.edu', '$2y$10$z/dcwNUj72MzvvMgqm0jsOzI0oJli.e9W75gP7RJuP.73f.KKjJ2a', 'users'),
@@ -149,7 +182,7 @@ INSERT INTO User ( Email, PasswordHash, Role) Values
   ('user3@csu.fullerton.edu', '$2y$10$z/dcwNUj72MzvvMgqm0jsOzI0oJli.e9W75gP7RJuP.73f.KKjJ2a', 'users'),
   ('manager@csu.fullerton.edu', '$2y$10$z/dcwNUj72MzvvMgqm0jsOzI0oJli.e9W75gP7RJuP.73f.KKjJ2a', 'manager');
 
-INSERT INTO Team (TeamName) Values 
+INSERT INTO Team (TeamName) Values
   ('Owls'),
   ('Titans'),
   ('Knights');
@@ -161,12 +194,28 @@ INSERT INTO Person (FirstName, LastName, Email, Street, City, State, Country, Zi
   ('Jack', 'Black', 'JB@csu.fullerton.edu', '2004 nowhere st.', 'Las Vegas', 'NV', 'USA', '62123'),
   ('Paul', 'Nelly', 'pn@csu.fullerton.edu', '444 Euclid st.', 'Garden Grove', 'CA', 'USA', '92843');
 
+INSERT INTO PersonStats (FirstName, LastName, GP, Min, PPG, RPG, APG, SPG, BPG, TPG, FGP, FTP, TPP) Values
+    ('Robert', 'Hare', '32', '32.9', '19.5', '3.5', '2.3', '1.1', '0.2', '2.3', '.489', '.746', '.429'),
+    ('Huy', 'Le', '32',	'31.3',	'15.1',	'3.8',	'1.6',	'1.2',	'0.2',	'2.4',	'.418',	'.829',	'.320'),
+    ('Adam', 'Brainich', '31',	'30.0',	'12.1',	'6.7',	'1.6',	'0.9',	'1.0',	'2.1',	'.581',	'.777',	'.414'),
+    ('Jack', 'Black', '32',	'27.3',	'7.2',	'3.6',	'2.7',	'1.0',	'0.2',	'1.8',	'.409',	'.660',	'.206'),
+    ('Paul', 'Nelly', '32',	'15.5',	'5.2',	'4.3',	'0.2',	'0.3',	'0.9',	'1.0',	'.643',	'.651',	'.000');
+
+
 INSERT INTO Player (PersonId, TeamId) Values
   (1, 1),
   (2, 2),
   (3, 3),
   (4, 1),
   (5, 2);
+
+  INSERT INTO PlayerStats (PersonId, TeamId) Values
+    (1, 1),
+    (2, 2),
+    (3, 3),
+    (4, 1),
+    (5, 2);
+
 
 INSERT INTO Game (TeamId_A, TeamId_B, TeamScore_A, TeamScore_B, GameDate) Values
   (1, 2, 45, 53, '2018-05-01'),

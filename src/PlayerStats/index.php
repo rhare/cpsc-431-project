@@ -58,11 +58,12 @@
                   <input type="text" class="form-control" name="blocksPerGame" id="blocksPerGame" placeholder="Enter Blocks Per Game">
                   <label for="turnoversPerGame">Turnovers Per Game</label>
                   <input type="text" class="form-control" name="turnoversPerGame" id="turnoversPerGame" placeholder="Enter Turnovers Per Game">
-                  <label for="turnoversPerGame">Turnovers Per Game</label>
-                  <input type="text" class="form-control" name="turnoversPerGame" id="turnoversPerGame" placeholder="Enter Turnovers Per Game">
-                  <label for="turnoversPerGame">Turnovers Per Game</label>
-                  <input type="text" class="form-control" name="turnoversPerGame" id="turnoversPerGame" placeholder="Enter Turnovers Per Game">
-
+                  <label for="fieldGoalsPercentage">Field Goals Percentage</label>
+                  <input type="text" class="form-control" name="fieldGoalsPercentage" id="fieldGoalsPercentage" placeholder="Enter Field Goals Percentage">
+                  <label for="freeThrowPercentage">Free Throw Percentage</label>
+                  <input type="text" class="form-control" name="freeThrowPercentage" id="freeThrowPercentage" placeholder="Enter Free Throw Percentage">
+                  <label for="threePointPercentage">Three Point Percentage</label>
+                  <input type="text" class="form-control" name="threePointPercentage" id="threePointPercentage" placeholder="Enter Three Point Percentage">
                 </div>
               </div>
               <button type="submit" class="btn btn-primary">Create New Player Statistics</button>
@@ -82,9 +83,9 @@ $query = "
 if(!($res = $db_conn->query($query))) {
   printf("Error: %s\n", $db_conn->error);
 }
-$players = array();
+$playerStats = array();
 while ($row = $res->fetch_assoc()) {
-  $players[] = $row;
+  $playerStats[] = $row;
 }
 ?>
       <table class="table">
@@ -96,11 +97,11 @@ while ($row = $res->fetch_assoc()) {
           </tr>
         </thead>
         <tbody>
-          <?php foreach ($players as $i => $playerArr) {  ?>
+          <?php foreach ($playerStats as $i => $playerStatsArr) {  ?>
               <tr scope="row">
                 <td><?php echo $i+1; ?></td>
-                <td><?php echo ucwords(strtolower($playerArr['FirstName'] . ' ' . $playerArr['LastName'])); ?></td>
-                <td><?php echo ucwords(strtolower($playerArr['TeamName'])); ?></td>
+                <td><?php echo ucwords(strtolower($playerStatsArr['FirstName'] . ' ' . $playerStatsArr['LastName'])); ?></td>
+                <td><?php echo ucwords(strtolower($playerStatsArr['TeamName'])); ?></td>
               </tr>
           <?php } ?>
         </tbody>
