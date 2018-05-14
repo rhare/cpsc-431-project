@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once($_SERVER['DOCUMENT_ROOT']  . '/utils/Database.php');
 ?>
 <!doctype html>

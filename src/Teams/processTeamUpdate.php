@@ -1,13 +1,14 @@
 <?php
-session_start();
+require_once($_SERVER['DOCUMENT_ROOT']  . '/utils/tools.php');
+$user = get_user_or_redirect_login(); // Starts session, also imports User
+
 require_once($_SERVER['DOCUMENT_ROOT']  . '/utils/Database.php');
 require_once($_SERVER['DOCUMENT_ROOT']  . '/Auth/User.php');
-require_once('Team.php');
+require_once($_SERVER['DOCUMENT_ROOT']  . '/Teams/Team.php');
 $message = array();
 $db = new Database();
 $teamName = $_POST['teamName'];
 $newTeam = new Team($teamName);
-$user = unserialize($_SESSION['user']);
 $db_conn = $db->connect_by_role($user->role());
 try {
   $saved = $newTeam->save($db_conn);

@@ -1,4 +1,7 @@
 <?php 
+require_once($_SERVER['DOCUMENT_ROOT']  . '/utils/tools.php');
+$user = get_user_or_redirect_login(); // Starts session, also imports User
+
 if(!empty($_GET) && isset($_GET['id'])) {
   require('viewGame.php');
   exit(0);
