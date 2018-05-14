@@ -89,8 +89,8 @@ class PlayerStats {
       SELECT  PlayerStats.PersonId,
               PlayerStats.UserId,
               PlayerStats.TeamId,
-              PersonStats.FirstName,
-              PersonStats.LastName
+              Person.FirstName,
+              Person.LastName
       FROM    PlayerStats, Person
       WHERE   PlayerStats.PlayerId = ?
               AND PlayerStats.PersonId = Person.PersonId
@@ -136,7 +136,7 @@ class PlayerStats {
 
     if(!($stmt = $db_conn->prepare($query))) {
       if($db_conn->errno == 1142){
-        new Player($firstName, $lastName, '', '', '', '', '', '', '', '', '', '', '', $playerId, $teamId, $personId, $userId);
+        new PlayerStats($firstName, $lastName, '', '', '', '', '', '', '', '', '', '', '', $playerId, $teamId, $personId, $userId);
       }
       echo "Prepare failed: (" . $db_conn->errno . ") " . $db_conn->error;
       die("Database execution failed");
@@ -165,7 +165,7 @@ class PlayerStats {
       $fieldGoalsPercentage  = $row['FGP'];
       $freeThrowPercentage  = $row['FTP'];
       $threePointPercentage  = $row['TPP'];
-      new Player($firstName, $lastName, $gamesPlayed, $minutes, $pointsPerGame, $reboundsPerGame, $assistsPerGame, $stealsPerGame, $blocksPerGame, $turnoversPerGame, $fieldGoalsPercentage, $freeThrowPercentage, $threePointPercentage, $playerId, $teamId, $personId, $userId);
+      new PlayerStats($firstName, $lastName, $gamesPlayed, $minutes, $pointsPerGame, $reboundsPerGame, $assistsPerGame, $stealsPerGame, $blocksPerGame, $turnoversPerGame, $fieldGoalsPercentage, $freeThrowPercentage, $threePointPercentage, $playerId, $teamId, $personId, $userId);
     }
   }
 
