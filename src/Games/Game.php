@@ -42,7 +42,7 @@ class Game {
   }
 
 
-  public static function query_by_gameid($db_conn, $gameid) {
+  public static function query_by_gameid($db_conn, $gameId) {
     // Get player by public info
     $query = "SELECT * FROM Game WHERE GameId = ?";
 
@@ -60,9 +60,9 @@ class Game {
     }
     $res = $stmt->get_result();
     $row =  $res->fetch_assoc();
-    if(empty($row))
+    if(empty($row)){
       return NULL;
-    else {
+    } else {
       $teamId_A = $row['TeamId_A'];
       $teamId_B = $row['TeamId_B'];
       $teamScore_A = $row['TeamScore_A'];
