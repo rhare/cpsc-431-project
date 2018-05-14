@@ -147,7 +147,11 @@ GRANT SELECT ON PlayerStats TO observer IDENTIFIED BY 'observer-pw1';
 GRANT SELECT ON Coach TO observer IDENTIFIED BY 'observer-pw1';
 GRANT SELECT ON User TO observer IDENTIFIED by 'observer-pw1';
 GRANT SELECT (PersonId, FirstName, LastName) ON Person TO observer IDENTIFIED by 'observer-pw1';
-GRANT SELECT (PersonId, FirstName, LastName) ON PersonStats TO observer IDENTIFIED by 'observer-pw1';
+GRANT SELECT (PersonId, FirstName, LastName, GP, Min, PPG, RPG, APG, SPG, BPG, TPG, FGP, FTP, TPP) ON PersonStats TO users IDENTIFIED by 'observers-pw1';
+
+/*GRANT SELECT ON PersonStats TO observer IDENTIFIED by 'observer-pw1';
+GRANT SELECT (PersonId, FirstName, LastName, Email, Street, City, State, Country, ZipCode) ON Person TO users IDENTIFIED by 'manager-pw1';
+*/
 GRANT EXECUTE ON PROCEDURE set_password TO observer IDENTIFIED by 'observer-pw1';
 GRANT EXECUTE ON PROCEDURE new_user TO observer IDENTIFIED by 'observer-pw1';
 
@@ -159,9 +163,27 @@ GRANT SELECT ON PlayerStats TO users IDENTIFIED BY 'users-pw1';
 GRANT SELECT ON Coach TO users IDENTIFIED BY 'users-pw1';
 GRANT SELECT ON User TO users IDENTIFIED by 'users-pw1';
 GRANT SELECT (PersonId, FirstName, LastName) ON Person TO users IDENTIFIED by 'users-pw1';
-GRANT SELECT (PersonId, FirstName, LastName) ON PersonStats TO users IDENTIFIED by 'users-pw1';
+GRANT SELECT (PersonId, FirstName, LastName, GP, Min, PPG, RPG, APG, SPG, BPG, TPG, FGP, FTP, TPP) ON PersonStats TO users IDENTIFIED by 'users-pw1';
+/*GRANT SELECT ON PersonStats TO users IDENTIFIED by 'users-pw1';
+GRANT SELECT (PersonId, FirstName, LastName, Email, Street, City, State, Country, ZipCode) ON Person TO users IDENTIFIED by 'users-pw1';
+*/
 GRANT EXECUTE ON PROCEDURE set_password TO users IDENTIFIED by 'users-pw1';
 GRANT EXECUTE ON PROCEDURE new_user TO users IDENTIFIED by 'users-pw1';
+
+GRANT SELECT, INSERT, UPDATE, DELETE ON Game TO users IDENTIFIED BY 'manager-pw1';
+GRANT SELECT, INSERT, UPDATE, DELETE ON Stat TO users IDENTIFIED BY 'manager-pw1';
+GRANT SELECT, INSERT, UPDATE, DELETE ON Team TO users IDENTIFIED BY 'manager-pw1';
+GRANT SELECT ON Player TO users IDENTIFIED BY 'manager-pw1';
+GRANT SELECT ON PlayerStats TO users IDENTIFIED BY 'manager-pw1';
+GRANT SELECT ON Coach TO users IDENTIFIED BY 'manager-pw1';
+GRANT SELECT ON User TO users IDENTIFIED by 'manager-pw1';
+GRANT SELECT (PersonId, FirstName, LastName) ON Person TO users IDENTIFIED by 'manager-pw1';
+GRANT SELECT (PersonId, FirstName, LastName, GP, Min, PPG, RPG, APG, SPG, BPG, TPG, FGP, FTP, TPP) ON PersonStats TO users IDENTIFIED by 'manager-pw1';
+/*GRANT SELECT ON PersonStats TO users IDENTIFIED by 'manager-pw1';
+GRANT SELECT (PersonId, FirstName, LastName, Email, Street, City, State, Country, ZipCode) ON Person TO users IDENTIFIED by 'manager-pw1';
+*/
+GRANT EXECUTE ON PROCEDURE set_password TO users IDENTIFIED by 'manager-pw1';
+GRANT EXECUTE ON PROCEDURE new_user TO users IDENTIFIED by 'manager-pw1';
 
 GRANT SELECT, INSERT, UPDATE, DELETE ON Game TO manager IDENTIFIED BY 'manager-pw1';
 GRANT SELECT, INSERT, UPDATE, DELETE ON Team TO manager IDENTIFIED BY 'manager-pw1';
@@ -202,7 +224,7 @@ INSERT INTO PersonStats (FirstName, LastName, GP, Min, PPG, RPG, APG, SPG, BPG, 
     ('Huy', 'Le', '32',	'31.3',	'15.1',	'3.8',	'1.6',	'1.2',	'0.2',	'2.4',	'.418',	'.829',	'.320'),
     ('Adam', 'Brainich', '31',	'30.0',	'12.1',	'6.7',	'1.6',	'0.9',	'1.0',	'2.1',	'.581',	'.777',	'.414'),
     ('Jack', 'Black', '32',	'27.3',	'7.2',	'3.6',	'2.7',	'1.0',	'0.2',	'1.8',	'.409',	'.660',	'.206'),
-    ('Paul', 'Nelly', '32',	'15.5',	'5.2',	'4.3',	'0.2',	'0.3',	'0.9',	'1.0',	'.643',	'.651',	'.000');
+    ('Peter', 'Nelly', '32',	'15.5',	'5.2',	'4.3',	'0.2',	'0.3',	'0.9',	'1.0',	'.643',	'.651',	'.000');
 
 
 INSERT INTO Player (PersonId, TeamId) Values
