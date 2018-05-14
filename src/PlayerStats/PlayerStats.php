@@ -255,7 +255,7 @@ class PlayerStats {
       return $this->minutes;
     } else if( func_num_args() == 1 ) {
       $value = func_get_arg(0);
-      $this->minutes = (double) $value;
+      $this->minutes = (float) $value;
     }
     return $this;
   }
@@ -265,7 +265,7 @@ class PlayerStats {
       return $this->pointsPerGame;
     } else if( func_num_args() == 1 ) {
       $value = func_get_arg(0);
-      $this->pointsPerGame = (double) $value;
+      $this->pointsPerGame = (float) $value;
     }
     return $this;
   }
@@ -275,7 +275,7 @@ class PlayerStats {
       return $this->reboundsPerGame;
     } else if( func_num_args() == 1 ) {
       $value = func_get_arg(0);
-      $this->reboundsPerGame = (double) $value;
+      $this->reboundsPerGame = (float) $value;
     }
     return $this;
   }
@@ -285,7 +285,7 @@ class PlayerStats {
       return $this->assistsPerGame;
     } else if( func_num_args() == 1 ) {
       $value = func_get_arg(0);
-      $this->assistsPerGame = (double) $value;
+      $this->assistsPerGame = (float) $value;
     }
     return $this;
   }
@@ -295,7 +295,7 @@ class PlayerStats {
       return $this->stealsPerGame;
     } else if( func_num_args() == 1 ) {
       $value = func_get_arg(0);
-      $this->stealsPerGame = (double) $value;
+      $this->stealsPerGame = (float) $value;
     }
     return $this;
   }
@@ -305,7 +305,7 @@ class PlayerStats {
       return $this->blocksPerGame;
     } else if( func_num_args() == 1 ) {
       $value = func_get_arg(0);
-      $this->blocksPerGame = (double) $value;
+      $this->blocksPerGame = (float) $value;
     }
     return $this;
   }
@@ -315,7 +315,7 @@ class PlayerStats {
       return $this->turnoversPerGame;
     } else if( func_num_args() == 1 ) {
       $value = func_get_arg(0);
-      $this->turnoversPerGame = (double) $value;
+      $this->turnoversPerGame = (float) $value;
     }
     return $this;
   }
@@ -325,7 +325,7 @@ class PlayerStats {
       return $this->fieldGoalsPercentage;
     } else if( func_num_args() == 1 ) {
       $value = func_get_arg(0);
-      $this->fieldGoalsPercentage = (double) $value;
+      $this->fieldGoalsPercentage = (float) $value;
     }
     return $this;
   }
@@ -335,7 +335,7 @@ class PlayerStats {
       return $this->freeThrowPercentage;
     } else if( func_num_args() == 1 ) {
       $value = func_get_arg(0);
-      $this->freeThrowPercentage = (double) $value;
+      $this->freeThrowPercentage = (float) $value;
     }
     return $this;
   }
@@ -345,7 +345,7 @@ class PlayerStats {
       return $this->threePointPercentage;
     } else if( func_num_args() == 1 ) {
       $value = func_get_arg(0);
-      $this->threePointPercentage = (double) $value;
+      $this->threePointPercentage = (float) $value;
     }
     return $this;
   }
