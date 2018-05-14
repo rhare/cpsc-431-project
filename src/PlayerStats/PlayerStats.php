@@ -22,7 +22,7 @@ class PlayerStats {
 
   public static function new_player_stats($db_conn, $firstName="", $lastName="", $gamesPlayed="", $minutes="", $pointsPerGame="", $reboundsPerGame="", $assistsPerGame="", $stealsPerGame="", $blocksPerGame="",
   $turnoversPerGame="", $fieldGoalsPercentage="", $freeThrowPercentage="", $threePointPercentage="", $teamId) {
-    if(empty($firstName) || empty($lastName) {
+    if(empty($firstName) || empty($lastName)) {
       throw new Exception('First Name and Last Name are required.');
     }
     // Create person
