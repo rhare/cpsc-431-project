@@ -22,7 +22,7 @@ $user = unserialize($_SESSION['user']);
 $db = new Database();
 $db_conn = $db->connect_by_role($user->role());
 try {
-  $newPlayer = PlayerStats::new_player_stats($db_conn, $firstName, $lastName, $gamesPlayed, $minutes, $pointsPerGame, $reboundsPerGame, $assistsPerGame, $stealsPerGame, $blocksPerGame, $turnoversPerGame, $fieldGoalsPercentage, $freeThrowPercentage, $threePointPercentage);
+  $newPlayer = PlayerStats::new_player_stats($db_conn, $firstName, $lastName, $gamesPlayed, $minutes, $pointsPerGame, $reboundsPerGame, $assistsPerGame, $stealsPerGame, $blocksPerGame, $turnoversPerGame, $fieldGoalsPercentage, $freeThrowPercentage, $threePointPercentage, $teamId);
   $message['alert_type'] = 'alert-success';
   $message['message'] = 'Player Stats successfully created';
 } catch (Exception $e) {
