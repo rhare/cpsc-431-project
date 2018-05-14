@@ -245,8 +245,7 @@ class PlayerStats {
       return $this->gamesPlayed;
     } else if( func_num_args() == 1 ) {
       $value = func_get_arg(0);
-        if( is_string($value) )
-          $this->gamesPlayed = $value;
+      $this->gamesPlayed = (int) $value;
     }
     return $this;
   }
@@ -256,8 +255,7 @@ class PlayerStats {
       return $this->minutes;
     } else if( func_num_args() == 1 ) {
       $value = func_get_arg(0);
-      if( is_string($value) )
-        $this->minutes = $value;
+      $this->minutes = (double) $value;
     }
     return $this;
   }
@@ -267,8 +265,7 @@ class PlayerStats {
       return $this->pointsPerGame;
     } else if( func_num_args() == 1 ) {
       $value = func_get_arg(0);
-      if( is_string($value) )
-        $this->pointsPerGame = $value;
+      $this->pointsPerGame = (double) $value;
     }
     return $this;
   }
@@ -278,8 +275,7 @@ class PlayerStats {
       return $this->reboundsPerGame;
     } else if( func_num_args() == 1 ) {
       $value = func_get_arg(0);
-      if( is_string($value) )
-        $this->reboundsPerGame = $value;
+      $this->reboundsPerGame = (double) $value;
     }
     return $this;
   }
@@ -289,8 +285,7 @@ class PlayerStats {
       return $this->assistsPerGame;
     } else if( func_num_args() == 1 ) {
       $value = func_get_arg(0);
-      if( is_string($value) )
-        $this->assistsPerGame = $value;
+      $this->assistsPerGame = (double) $value;
     }
     return $this;
   }
@@ -300,8 +295,7 @@ class PlayerStats {
       return $this->stealsPerGame;
     } else if( func_num_args() == 1 ) {
       $value = func_get_arg(0);
-      if( is_string($value) )
-        $this->stealsPerGame = $value;
+      $this->stealsPerGame = (double) $value;
     }
     return $this;
   }
@@ -311,8 +305,7 @@ class PlayerStats {
       return $this->blocksPerGame;
     } else if( func_num_args() == 1 ) {
       $value = func_get_arg(0);
-      if( is_string($value) )
-        $this->blocksPerGame = $value;
+      $this->blocksPerGame = (double) $value;
     }
     return $this;
   }
@@ -322,8 +315,7 @@ class PlayerStats {
       return $this->turnoversPerGame;
     } else if( func_num_args() == 1 ) {
       $value = func_get_arg(0);
-      if( is_string($value) )
-        $this->turnoversPerGame = $value;
+      $this->turnoversPerGame = (double) $value;
     }
     return $this;
   }
@@ -333,8 +325,7 @@ class PlayerStats {
       return $this->fieldGoalsPercentage;
     } else if( func_num_args() == 1 ) {
       $value = func_get_arg(0);
-      if( is_string($value) )
-        $this->fieldGoalsPercentage = $value;
+      $this->fieldGoalsPercentage = (double) $value;
     }
     return $this;
   }
@@ -344,8 +335,7 @@ class PlayerStats {
       return $this->freeThrowPercentage;
     } else if( func_num_args() == 1 ) {
       $value = func_get_arg(0);
-      if( is_string($value) )
-        $this->freeThrowPercentage = $value;
+      $this->freeThrowPercentage = (double) $value;
     }
     return $this;
   }
@@ -355,8 +345,7 @@ class PlayerStats {
       return $this->threePointPercentage;
     } else if( func_num_args() == 1 ) {
       $value = func_get_arg(0);
-      if( is_string($value) )
-        $this->threePointPercentage = $value;
+      $this->threePointPercentage = (double) $value;
     }
     return $this;
   }
