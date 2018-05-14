@@ -1,4 +1,9 @@
-<?php require_once($_SERVER['DOCUMENT_ROOT']  . '/header.php'); ?>
+<?php
+require_once($_SERVER['DOCUMENT_ROOT']  . '/utils/tools.php');
+$user = get_user_or_redirect_login(); // Starts session, also imports User
+
+require_once($_SERVER['DOCUMENT_ROOT']  . '/header.php');
+?>
 <div class="container my-3">
   <div class="row my-2">
     <div class="col-s">
@@ -77,9 +82,9 @@
     <div class="col-lg">
 <?php
 $query = "
-  SELECT  Person.FirstName, Person.LastName, Person.PersonId, Team.TeamName
-  FROM    PlayerStats, Person, Team
-  WHERE   PlayerStats.PersonId=Person.PersonId and PlayerStats.TeamId = Team.TeamId";
+  SELECT  PersonStats.FirstName, PersonStats.LastName, PersonStats.PersonStatsId, Team.TeamName, PersonStats.GP, PersonStats.Min, PersonStats.PPG, PersonStats.RPG, PersonStats.APG, PersonStats.SPG, PersonStats.BPG, PersonStats.TPG, PersonStats.FGP, PersonStats.FTP, PersonStats.TPP
+  FROM    PlayerStats, PersonStats, Team
+  WHERE   PlayerStats.PersonId=PersonStats.PersonId and PlayerStats.TeamId = Team.TeamId";
 if(!($res = $db_conn->query($query))) {
   printf("Error: %s\n", $db_conn->error);
 }
@@ -94,6 +99,17 @@ while ($row = $res->fetch_assoc()) {
             <th scope="col">#</th>
             <th scope="col">Name</th>
             <th scope="col">Team</th>
+            <th scope="col">GP</th>
+            <th scope="col">Min</th>
+            <th scope="col">PPG</th>
+            <th scope="col">RPG</th>
+            <th scope="col">APG</th>
+            <th scope="col">SPG</th>
+            <th scope="col">BPG</th>
+            <th scope="col">TPG</th>
+            <th scope="col">FGP</th>
+            <th scope="col">FTP</th>
+            <th scope="col">3PP</th>
           </tr>
         </thead>
         <tbody>
@@ -102,6 +118,17 @@ while ($row = $res->fetch_assoc()) {
                 <td><?php echo $i+1; ?></td>
                 <td><?php echo ucwords(strtolower($playerStatsArr['FirstName'] . ' ' . $playerStatsArr['LastName'])); ?></td>
                 <td><?php echo ucwords(strtolower($playerStatsArr['TeamName'])); ?></td>
+                <td><?php echo $playerStatsArr['GP']; ?></td>
+                <td><?php echo $playerStatsArr['Min']; ?></td>
+                <td><?php echo $playerStatsArr['PPG']; ?></td>
+                <td><?php echo $playerStatsArr['RPG']; ?></td>
+                <td><?php echo $playerStatsArr['APG']; ?></td>
+                <td><?php echo $playerStatsArr['SPG']; ?></td>
+                <td><?php echo $playerStatsArr['BPG']; ?></td>
+                <td><?php echo $playerStatsArr['TPG']; ?></td>
+                <td><?php echo $playerStatsArr['FGP']; ?></td>
+                <td><?php echo $playerStatsArr['FTP']; ?></td>
+                <td><?php echo $playerStatsArr['TPP']; ?></td>
               </tr>
           <?php } ?>
         </tbody>
