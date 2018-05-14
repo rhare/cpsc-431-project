@@ -1,5 +1,7 @@
 <?php
-session_start();
+require_once($_SERVER['DOCUMENT_ROOT']  . '/utils/tools.php');
+$user = get_user_or_redirect_login(); // Starts session, also imports User
+
 if(isset($_GET['id'])){
   $id = $_GET['id'];
 } else {
@@ -7,7 +9,6 @@ if(isset($_GET['id'])){
   http_response_code(404);
   exit(0);
 }
-require_once($_SERVER['DOCUMENT_ROOT']  . '/Auth/User.php');
 require_once($_SERVER['DOCUMENT_ROOT']  . '/Teams/Team.php');
 require_once($_SERVER['DOCUMENT_ROOT']  . '/utils/Database.php');
 require_once($_SERVER['DOCUMENT_ROOT']  . '/Games/Game.php');

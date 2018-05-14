@@ -1,7 +1,10 @@
 <?php 
-session_start();
+require_once($_SERVER['DOCUMENT_ROOT']  . '/utils/tools.php');
+redirect_root_if_auth(); // Starts session, also imports User
+
+require_once($_SERVER['DOCUMENT_ROOT']  . '/Auth/User.php');
 require_once($_SERVER['DOCUMENT_ROOT']  . '/utils/Database.php');
-require_once('User.php');
+
 if($_POST) {
   $email = trim($_POST['email']);
   $password = trim($_POST['password']);

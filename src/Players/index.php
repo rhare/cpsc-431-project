@@ -1,4 +1,9 @@
-<?php require_once($_SERVER['DOCUMENT_ROOT']  . '/header.php'); ?>
+<?php 
+require_once($_SERVER['DOCUMENT_ROOT']  . '/utils/tools.php');
+$user = get_user_or_redirect_login(); // Starts session, also imports User
+
+require_once($_SERVER['DOCUMENT_ROOT']  . '/header.php'); 
+?>
 <div class="container my-3">
   <div class="row my-2">
     <div class="col-s">
