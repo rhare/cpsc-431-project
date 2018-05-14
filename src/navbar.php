@@ -1,4 +1,4 @@
-<?php 
+<?php
 //  ## Do not import this ##
 //  This navbar file is imported in header.php. Therefore, just import header.php and you'll get both the header
 //  and the nav bar.
@@ -18,6 +18,9 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/Players/">Players</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/PlayerStats/">PlayerStats</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/Games/">Games</a>
