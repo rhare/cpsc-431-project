@@ -32,7 +32,7 @@ class Player {
 
     // ZipCode has check constarints on it. Will only allow valid zipcode or Null.
     // Cast to NULL if empty.
-    $zipcode = (empty($zipcode)) ? NULL : $this->zipcode;
+    $zipcode = (empty($zipcode)) ? NULL : $zipcode;
     if (!$stmt->bind_param(
       'ssssssss', 
       $firstName,
