@@ -69,7 +69,7 @@ if($_POST) {
               <input <?php if(!empty($email)) echo 'value="'.$email.'"';?>required type="email" class="form-control" name="email" id="email" placeholder="Enter your email">
               <label for="password1">Password</label>
               <input required type="password" class="form-control" name="password1" id="password1" placeholder="Enter your password" aria-describedby="passwordHelp">
-              <small id="passwordHelp" class="form-text text-muted">Password requirements: at least 12 character, 1 uppercase, 1 lowercase.</small>
+              <small id="passwordHelp" class="form-text text-muted">Password requirements: at least 8 character, 1 uppercase, 1 lowercase.</small>
               <label for="password2">Confirm password</label>
               <input required type="password" class="form-control" name="password2" id="password2" placeholder="Confirm your password">
             </div>

@@ -37,7 +37,7 @@ class User {
       echo "Prepare failed: (" . $db_conn->errno . ") " . $db_conn->error;
       die("Database execution failed");
     }
-    if (!$stmt->bind_param('s', $userId())){
+    if (!$stmt->bind_param('i', $userId)){
       echo "Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error;
       die("Database execution failed");
     }
@@ -46,7 +46,7 @@ class User {
       if($db_conn->errno == 1062){
         throw new Exception('User already exists');
       } else {
-        throw new Exception('Failed to create the user account');
+        throw new Exception('Failed to get the user');
       }
     }
     $res = $stmt->get_result();
@@ -152,6 +152,25 @@ class User {
      return (var_export($this, true));
    }
 
+  function promoteRole($db_conn, $role) {
+    $query = "UPDATE User SET Role = ? WHERE UserId = ?";
+    if(!($stmt = $db_conn->prepare($query))) {
+      if($db_conn->errno == 1142){
+        throw new Exception('Permission denied');
+      }
+      echo "Prepare failed: (" . $db_conn->errno . ") " . $db_conn->error;
+      die("Database execution failed");
+    }
+    if (!$stmt->bind_param('si', $role, $this->userId())){
+      echo "Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error;
+      die("Database execution failed");
+    }
+
+    if (!$stmt->execute()) {
+      throw new Exception('Failed to promote the user.');
+    }
+    return True;
+  }
 
   function save($db_conn) {
     $query = "CALL new_user(?, ?, ?)";
