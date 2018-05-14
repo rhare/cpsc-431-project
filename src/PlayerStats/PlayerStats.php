@@ -8,17 +8,17 @@ class PlayerStats {
   private $userId = NULL;
   private $firstName = "";
   private $lastName = "";
-  private $gamesPlayed = "";
-  private $minutes  = "";
-  private $pointsPerGame  = "";
-  private $reboundsPerGame    = "";
-  private $assistsPerGame    = "";
-  private $stealsPerGame    = "";
-  private $blocksPerGame    = "";
-  private $turnoversPerGame    = "";
-  private $fieldGoalsPercentage    = "";
-  private $freeThrowPercentage    = "";
-  private $threePointPercentage   = "";
+  private $gamesPlayed = NULL;
+  private $minutes  = NULL;
+  private $pointsPerGame  = NULL;
+  private $reboundsPerGame    = NULL;
+  private $assistsPerGame    = NULL;
+  private $stealsPerGame    = NULL;
+  private $blocksPerGame    = NULL;
+  private $turnoversPerGame    = NULL;
+  private $fieldGoalsPercentage    = NULL;
+  private $freeThrowPercentage    = NULL;
+  private $threePointPercentage   = NULL;
 
   public static function new_player_stats($db_conn, $firstName="", $lastName="", $gamesPlayed="", $minutes="", $pointsPerGame="", $reboundsPerGame="", $assistsPerGame="", $stealsPerGame="", $blocksPerGame="",
   $turnoversPerGame="", $fieldGoalsPercentage="", $freeThrowPercentage="", $threePointPercentage="", $teamId) {
