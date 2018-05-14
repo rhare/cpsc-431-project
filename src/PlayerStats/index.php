@@ -82,7 +82,7 @@ require_once($_SERVER['DOCUMENT_ROOT']  . '/header.php');
     <div class="col-lg">
 <?php
 $query = "
-  SELECT  PersonStats.FirstName, PersonStats.LastName, PersonStats.PersonStatsId, Team.TeamName, PersonStats.GP, PersonStats.Min, PersonStats.PPG, PersonStats.RPG, PersonStats.APG, PersonStats.SPG, PersonStats.BPG, PersonStats.TPG, PersonStats.FGP, PersonStats.FTP, PersonStats.TPP
+  SELECT  PersonStats.FirstName, PersonStats.LastName, PersonStats.PersonId, Team.TeamName, PersonStats.GP, PersonStats.Min, PersonStats.PPG, PersonStats.RPG, PersonStats.APG, PersonStats.SPG, PersonStats.BPG, PersonStats.TPG, PersonStats.FGP, PersonStats.FTP, PersonStats.TPP
   FROM    PlayerStats, PersonStats, Team
   WHERE   PlayerStats.PersonId=PersonStats.PersonId and PlayerStats.TeamId = Team.TeamId";
 if(!($res = $db_conn->query($query))) {
