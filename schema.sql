@@ -38,7 +38,7 @@ CREATE TABLE Person (
 );
 
 CREATE TABLE PersonStats (
-  PersonId INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  PersonID INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   FirstName VARCHAR(100) NOT NULL,
   LastName VARCHAR(150) NOT NULL,
   GP FLOAT(16),
@@ -52,7 +52,7 @@ CREATE TABLE PersonStats (
   FGP FLOAT(16),
   FTP FLOAT(16),
   TPP FLOAT(16),
-  PRIMARY KEY (PersonId),
+  PRIMARY KEY (PersonID),
   UNIQUE KEY Name (LastName, FirstName)
 );
 
@@ -97,7 +97,7 @@ CREATE TABLE PlayerStats (
   UserId INT(10) UNSIGNED,
   TeamId INT(10) UNSIGNED NOT NULL,
   PRIMARY KEY (PlayerId),
-  FOREIGN KEY (PersonId) REFERENCES Person(PersonId) ON DELETE RESTRICT,
+  FOREIGN KEY (PersonId) REFERENCES PersonStats(PersonId) ON DELETE RESTRICT,
   FOREIGN KEY (UserId) REFERENCES User(UserId) ON DELETE SET NULL,
   FOREIGN KEY (TeamId) REFERENCES Team(TeamId) ON DELETE RESTRICT
 );
@@ -147,6 +147,7 @@ GRANT SELECT ON PlayerStats TO observer IDENTIFIED BY 'observer-pw1';
 GRANT SELECT ON Coach TO observer IDENTIFIED BY 'observer-pw1';
 GRANT SELECT ON User TO observer IDENTIFIED by 'observer-pw1';
 GRANT SELECT (PersonId, FirstName, LastName) ON Person TO observer IDENTIFIED by 'observer-pw1';
+GRANT SELECT (PersonId, FirstName, LastName) ON PersonStats TO observer IDENTIFIED by 'observer-pw1';
 GRANT EXECUTE ON PROCEDURE set_password TO observer IDENTIFIED by 'observer-pw1';
 GRANT EXECUTE ON PROCEDURE new_user TO observer IDENTIFIED by 'observer-pw1';
 
@@ -158,6 +159,7 @@ GRANT SELECT ON PlayerStats TO users IDENTIFIED BY 'users-pw1';
 GRANT SELECT ON Coach TO users IDENTIFIED BY 'users-pw1';
 GRANT SELECT ON User TO users IDENTIFIED by 'users-pw1';
 GRANT SELECT (PersonId, FirstName, LastName) ON Person TO users IDENTIFIED by 'users-pw1';
+GRANT SELECT (PersonId, FirstName, LastName) ON PersonStats TO users IDENTIFIED by 'users-pw1';
 GRANT EXECUTE ON PROCEDURE set_password TO users IDENTIFIED by 'users-pw1';
 GRANT EXECUTE ON PROCEDURE new_user TO users IDENTIFIED by 'users-pw1';
 
@@ -168,6 +170,7 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON User TO manager IDENTIFIED BY 'manager-p
 GRANT SELECT, INSERT, UPDATE, DELETE ON Person TO manager IDENTIFIED BY 'manager-pw1';
 GRANT SELECT, INSERT, UPDATE, DELETE ON PersonStats TO manager IDENTIFIED BY 'manager-pw1';
 GRANT SELECT, INSERT, UPDATE, DELETE ON Player TO manager IDENTIFIED BY 'manager-pw1';
+GRANT SELECT, INSERT, UPDATE, DELETE ON PlayerStats TO manager IDENTIFIED BY 'manager-pw1';
 GRANT SELECT, INSERT, UPDATE, DELETE ON Coach TO manager IDENTIFIED BY 'manager-pw1';
 GRANT EXECUTE ON PROCEDURE set_password TO manager IDENTIFIED by 'manager-pw1';
 GRANT EXECUTE ON PROCEDURE new_user TO manager IDENTIFIED by 'manager-pw1';
