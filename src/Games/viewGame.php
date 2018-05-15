@@ -112,15 +112,25 @@ $teamB = Team::query_by_teamid($db_conn, $game->teamId_B());
     <div class="col-lg">
 <?php
 $query = "
-  SELECT  * 
-  FROM    Stat, Player, Team  
+  SELECT  Person.FirstName, 
+          Person.LastName, 
+          Team.TeamName, 
+          Stat.PlayingTimeMin, 
+          Stat.PlayingTimeSec, 
+          Stat.Points,
+          Stat.Assists,
+          Stat.Rebounds
+  FROM    Stat, Player, Team, Person
   WHERE   Stat.GameId = ? 
           AND Player.PlayerId = Stat.PlayerId
           AND Team.TeamId = Player.TeamId
+          AND Player.PersonId = Person.PersonID
+  ORDER BY Team.TeamName
 ";
 
 if(!($stmt = $db_conn->prepare($query))){
   echo "Prepare failed: (" . $db_conn->errno . ") " . $db_conn->error;
+  echo "HERE I AM!!";
   die("Database execution failed");
 }
 
