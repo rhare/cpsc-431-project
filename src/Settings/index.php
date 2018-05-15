@@ -18,33 +18,66 @@ if(!empty($_SESSION['message'])) { ?>
 <?php echo $_SESSION['message']['message'];?>
 </div>
 <?php } ?>
-<div class="card" style="width: 36rem;">
-  <form action="/Settings/promoteUser.php" method="POST" data-teams="form">
-    <div class="card-body">
-      <h5 class="card-title">Promote User</h5>
-      <div class="form-group">
-          <div class="form-group">
-            <label for="userId">User</label>
-              <select required class="form-control" name="userId" id="userId">
-                <option value="">--Select User--</option>
-                  <?php foreach ($users as $i => $userArr) {  ?>
-                    <option value="<?php echo $userArr['UserId']; ?>">
-                      <?php echo $userArr['Email'];?>
-                    </option>
-                  <?php } ?>
-              </select>
-            <label for="role">User</label>
-              <select required class="form-control" name="role" id="role">
-                <option value="">--Select User--</option>
-                <option value="observer">Observer</option>
-                <option value="users">User</option>
-                <option value="manager">Manager</option>
-              </select>
+
+<div class="container my-3">
+  <div class="row my-2">
+    <div class="col-s">
+      <div class="card" style="width: 36rem;">
+        <form action="/Settings/promoteUser.php" method="POST" data-teams="form">
+          <div class="card-body">
+            <h5 class="card-title">Promote User</h5>
+            <div class="form-group">
+                <div class="form-group">
+                  <label for="userId">User</label>
+                    <select required class="form-control" name="userId" >
+                      <option value="">--Select User--</option>
+                        <?php foreach ($users as $i => $userArr) {  ?>
+                          <option value="<?php echo $userArr['UserId']; ?>">
+                            <?php echo $userArr['Email'];?>
+                          </option>
+                        <?php } ?>
+                    </select>
+                  <label for="role">User</label>
+                    <select required class="form-control" name="role" >
+                      <option value="">--Select User--</option>
+                      <option value="observer">Observer</option>
+                      <option value="users">User</option>
+                      <option value="manager">Manager</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Promote User</button>
+            </div>
           </div>
-          <button type="submit" class="btn btn-primary">Promote User</button>
+        </form>
       </div>
     </div>
-  </form>
+
+    <div class="col-s">
+      <div class="card" style="width: 36rem;">
+        <form action="/Settings/resetPassword.php" method="POST" data-teams="form">
+          <div class="card-body">
+            <h5 class="card-title">Reset Password</h5>
+            <div class="form-group">
+                <div class="form-group">
+                  <label for="userId">User</label>
+                    <select required class="form-control" name="userId" >
+                      <option value="">--Select User--</option>
+                        <?php foreach ($users as $i => $userArr) {  ?>
+                          <option value="<?php echo $userArr['UserId']; ?>">
+                            <?php echo $userArr['Email'];?>
+                          </option>
+                        <?php } ?>
+                    </select>
+                  <label for="password">Password</label>
+                  <input required type="password" class="form-control" name="password" placeholder="Enter Password">
+                </div>
+                <button type="submit" class="btn btn-primary">Reset Password</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
 
 <?
