@@ -239,6 +239,5 @@ INSERT INTO Stat (PlayerId, GameId, PlayingTimeMin, PlayingTimeSec,  Points, Ass
   (3, 2, 13, 45, 14, 5, 6),
   (3, 3, 35, 2, 40, 2, 3),
   (4, 1, 15, 52, 32, 11, 8),
-  (4, 2, 24, 42, 14, 8, 1),
   (5, 1, 35, 32, 14, 8, 1),
   (5, 2, 29, 54, 24, 2, 5);
