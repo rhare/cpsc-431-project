@@ -41,17 +41,17 @@ CREATE TABLE PersonStats (
   PersonID INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   FirstName VARCHAR(100) NOT NULL,
   LastName VARCHAR(150) NOT NULL,
-  GP FLOAT(16),
-  Min FLOAT(16),
-  PPG FLOAT(16),
-  RPG FLOAT(16),
-  APG FLOAT(16),
-  SPG FLOAT(16),
-  BPG FLOAT(16),
-  TPG FLOAT(16),
-  FGP FLOAT(16),
-  FTP FLOAT(16),
-  TPP FLOAT(16),
+  GP FLOAT(16) UNSIGNED,
+  Min FLOAT(16) UNSIGNED,
+  PPG FLOAT(16) UNSIGNED,
+  RPG FLOAT(16) UNSIGNED,
+  APG FLOAT(16) UNSIGNED,
+  SPG FLOAT(16) UNSIGNED,
+  BPG FLOAT(16) UNSIGNED,
+  TPG FLOAT(16) UNSIGNED,
+  FGP FLOAT(16) UNSIGNED,
+  FTP FLOAT(16) UNSIGNED,
+  TPP FLOAT(16) UNSIGNED,
   PRIMARY KEY (PersonID),
   UNIQUE KEY Name (LastName, FirstName)
 );
@@ -147,13 +147,12 @@ GRANT SELECT ON PlayerStats TO observer IDENTIFIED BY 'observer-pw1';
 GRANT SELECT ON Coach TO observer IDENTIFIED BY 'observer-pw1';
 GRANT SELECT ON User TO observer IDENTIFIED by 'observer-pw1';
 GRANT SELECT (PersonId, FirstName, LastName) ON Person TO observer IDENTIFIED by 'observer-pw1';
-GRANT SELECT (PersonId, FirstName, LastName, GP, Min, PPG, RPG, APG, SPG, BPG, TPG, FGP, FTP, TPP) ON PersonStats TO users IDENTIFIED by 'observers-pw1';
-
+GRANT SELECT (PersonId, FirstName, LastName, GP, Min, PPG, RPG, APG, SPG, BPG, TPG, FGP, FTP, TPP) ON PersonStats TO observer IDENTIFIED by 'observers-pw1';
+GRANT EXECUTE ON PROCEDURE set_password TO observer IDENTIFIED by 'observer-pw1';
+GRANT EXECUTE ON PROCEDURE new_user TO observer IDENTIFIED by 'observer-pw1';
 /*GRANT SELECT ON PersonStats TO observer IDENTIFIED by 'observer-pw1';
 GRANT SELECT (PersonId, FirstName, LastName, Email, Street, City, State, Country, ZipCode) ON Person TO users IDENTIFIED by 'manager-pw1';
 */
-GRANT EXECUTE ON PROCEDURE set_password TO observer IDENTIFIED by 'observer-pw1';
-GRANT EXECUTE ON PROCEDURE new_user TO observer IDENTIFIED by 'observer-pw1';
 
 GRANT SELECT, INSERT, UPDATE, DELETE ON Game TO users IDENTIFIED BY 'users-pw1';
 GRANT SELECT, INSERT, UPDATE, DELETE ON Stat TO users IDENTIFIED BY 'users-pw1';
@@ -164,26 +163,26 @@ GRANT SELECT ON Coach TO users IDENTIFIED BY 'users-pw1';
 GRANT SELECT ON User TO users IDENTIFIED by 'users-pw1';
 GRANT SELECT (PersonId, FirstName, LastName) ON Person TO users IDENTIFIED by 'users-pw1';
 GRANT SELECT (PersonId, FirstName, LastName, GP, Min, PPG, RPG, APG, SPG, BPG, TPG, FGP, FTP, TPP) ON PersonStats TO users IDENTIFIED by 'users-pw1';
+GRANT EXECUTE ON PROCEDURE set_password TO users IDENTIFIED by 'users-pw1';
+GRANT EXECUTE ON PROCEDURE new_user TO users IDENTIFIED by 'users-pw1';
 /*GRANT SELECT ON PersonStats TO users IDENTIFIED by 'users-pw1';
 GRANT SELECT (PersonId, FirstName, LastName, Email, Street, City, State, Country, ZipCode) ON Person TO users IDENTIFIED by 'users-pw1';
 */
-GRANT EXECUTE ON PROCEDURE set_password TO users IDENTIFIED by 'users-pw1';
-GRANT EXECUTE ON PROCEDURE new_user TO users IDENTIFIED by 'users-pw1';
 
-GRANT SELECT, INSERT, UPDATE, DELETE ON Game TO users IDENTIFIED BY 'manager-pw1';
-GRANT SELECT, INSERT, UPDATE, DELETE ON Stat TO users IDENTIFIED BY 'manager-pw1';
-GRANT SELECT, INSERT, UPDATE, DELETE ON Team TO users IDENTIFIED BY 'manager-pw1';
-GRANT SELECT ON Player TO users IDENTIFIED BY 'manager-pw1';
-GRANT SELECT ON PlayerStats TO users IDENTIFIED BY 'manager-pw1';
-GRANT SELECT ON Coach TO users IDENTIFIED BY 'manager-pw1';
-GRANT SELECT ON User TO users IDENTIFIED by 'manager-pw1';
-GRANT SELECT (PersonId, FirstName, LastName) ON Person TO users IDENTIFIED by 'manager-pw1';
-GRANT SELECT (PersonId, FirstName, LastName, GP, Min, PPG, RPG, APG, SPG, BPG, TPG, FGP, FTP, TPP) ON PersonStats TO users IDENTIFIED by 'manager-pw1';
+GRANT SELECT, INSERT, UPDATE, DELETE ON Game TO manager IDENTIFIED BY 'manager-pw1';
+GRANT SELECT, INSERT, UPDATE, DELETE ON Stat TO manager IDENTIFIED BY 'manager-pw1';
+GRANT SELECT, INSERT, UPDATE, DELETE ON Team TO manager IDENTIFIED BY 'manager-pw1';
+GRANT SELECT ON Player TO manager IDENTIFIED BY 'manager-pw1';
+GRANT SELECT ON PlayerStats TO manager IDENTIFIED BY 'manager-pw1';
+GRANT SELECT ON Coach TO manager IDENTIFIED BY 'manager-pw1';
+GRANT SELECT ON User TO manager IDENTIFIED by 'manager-pw1';
+GRANT SELECT (PersonId, FirstName, LastName) ON Person TO manager IDENTIFIED by 'manager-pw1';
+GRANT SELECT (PersonId, FirstName, LastName, GP, Min, PPG, RPG, APG, SPG, BPG, TPG, FGP, FTP, TPP) ON PersonStats TO manager IDENTIFIED by 'manager-pw1';
+GRANT EXECUTE ON PROCEDURE set_password TO manager IDENTIFIED by 'manager-pw1';
+GRANT EXECUTE ON PROCEDURE new_user TO manager IDENTIFIED by 'manager-pw1';
 /*GRANT SELECT ON PersonStats TO users IDENTIFIED by 'manager-pw1';
 GRANT SELECT (PersonId, FirstName, LastName, Email, Street, City, State, Country, ZipCode) ON Person TO users IDENTIFIED by 'manager-pw1';
 */
-GRANT EXECUTE ON PROCEDURE set_password TO users IDENTIFIED by 'manager-pw1';
-GRANT EXECUTE ON PROCEDURE new_user TO users IDENTIFIED by 'manager-pw1';
 
 GRANT SELECT, INSERT, UPDATE, DELETE ON Game TO manager IDENTIFIED BY 'manager-pw1';
 GRANT SELECT, INSERT, UPDATE, DELETE ON Team TO manager IDENTIFIED BY 'manager-pw1';
