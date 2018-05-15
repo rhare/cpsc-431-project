@@ -170,21 +170,6 @@ GRANT SELECT (PersonId, FirstName, LastName, Email, Street, City, State, Country
 */
 
 GRANT SELECT, INSERT, UPDATE, DELETE ON Game TO manager IDENTIFIED BY 'manager-pw1';
-GRANT SELECT, INSERT, UPDATE, DELETE ON Stat TO manager IDENTIFIED BY 'manager-pw1';
-GRANT SELECT, INSERT, UPDATE, DELETE ON Team TO manager IDENTIFIED BY 'manager-pw1';
-GRANT SELECT ON Player TO manager IDENTIFIED BY 'manager-pw1';
-GRANT SELECT ON PlayerStats TO manager IDENTIFIED BY 'manager-pw1';
-GRANT SELECT ON Coach TO manager IDENTIFIED BY 'manager-pw1';
-GRANT SELECT ON User TO manager IDENTIFIED by 'manager-pw1';
-GRANT SELECT (PersonId, FirstName, LastName) ON Person TO manager IDENTIFIED by 'manager-pw1';
-GRANT SELECT (PersonId, FirstName, LastName, GP, Min, PPG, RPG, APG, SPG, BPG, TPG, FGP, FTP, TPP) ON PersonStats TO manager IDENTIFIED by 'manager-pw1';
-GRANT EXECUTE ON PROCEDURE set_password TO manager IDENTIFIED by 'manager-pw1';
-GRANT EXECUTE ON PROCEDURE new_user TO manager IDENTIFIED by 'manager-pw1';
-/*GRANT SELECT ON PersonStats TO users IDENTIFIED by 'manager-pw1';
-GRANT SELECT (PersonId, FirstName, LastName, Email, Street, City, State, Country, ZipCode) ON Person TO users IDENTIFIED by 'manager-pw1';
-*/
-
-GRANT SELECT, INSERT, UPDATE, DELETE ON Game TO manager IDENTIFIED BY 'manager-pw1';
 GRANT SELECT, INSERT, UPDATE, DELETE ON Team TO manager IDENTIFIED BY 'manager-pw1';
 GRANT SELECT, INSERT, UPDATE, DELETE ON Stat TO manager IDENTIFIED BY 'manager-pw1';
 GRANT SELECT, INSERT, UPDATE, DELETE ON User TO manager IDENTIFIED BY 'manager-pw1';
